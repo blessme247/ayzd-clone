@@ -7,7 +7,7 @@
     --white--text: #fff;
     --paragrapgh--line--height1: 1.5;
     --paragrapgh--line--height2: 1.6;
-    --grey--text--color: #ffffff99;
+    --grey--text--color: rgba(255, 255, 255, 0.6);
 
   }
 
@@ -63,9 +63,8 @@ p {
 }
 
 
+
 /* NAVBAR */
-
-
 
 .container {
     width: var(--max-width);
@@ -73,19 +72,24 @@ p {
     margin: 0 auto;
 }
 
-nav{
-    
-
-    /* display: block; */
+.header {
     height: 5rem;
     position: fixed;
     top: 0%;
     left: 0%;
     right: 0%;
-    /* width: 100%; */
-    border-bottom: 1px solid var(--nav--bottom--border);
-    /* border: 1px solid red; */
+    /* display: none; */
 }
+
+nav{
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--nav--bottom--border);
+}
+
+
+
 
 .desktopNav {
     height: 100%;
@@ -122,8 +126,6 @@ nav{
 .navLeft .dropdown {
     position: relative;
     cursor: pointer;
-    /* display: inline-block; */
-    /* z-index: 5; */
 }
 
 .navLeft .dropdown .dropdownLinkWrapper {
@@ -165,7 +167,7 @@ nav{
 
   transition: transform 0.3s ease;
 
-  /* border: 1px solid yellow; */
+  border: 1px solid transparent;
     
 }
 
@@ -185,7 +187,6 @@ nav{
     display: flex;
     flex-direction: column;
     gap: 2.6rem;
-
     padding: 24px;
 }
 
@@ -300,23 +301,42 @@ nav{
     color: var(--purple--text);
 }
 
+main {
+    /* background-color: #000000; */
+    position: fixed;
+    top: 5rem;
+    left: 0;
+    height: calc(100% - 5rem);
+    width: 100%;
+    overflow-y: scroll;
+    /* border: 1px solid red; */
+    overflow-x: hidden;
+  }
+
+  .scroll__container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    
+    
+  }
+
+
+
 
 
 /* HERO SECTION */
 
 #hero {
     height: 100%;
-    position: relative;
+    width: 100%;
     
 }
 
 .heroText {
-    position: absolute;
-    top: 30%;
-    left: 30%;
-    transform: translate(-30%, -50%);
     width: 100%;
-    margin-top: 5rem;
+    margin-top: 8rem;
+    
 
 }
 
@@ -352,9 +372,12 @@ nav{
 .heroText .heroCTAButton {
   position: relative;
   z-index: 50;
+  margin: 1.6rem auto 0;
+}
+
+.heroText .heroCTAButton, .sectionContainer .textSection .discoverButton {
   display: block;
   width: 210px;
-  margin: 1.6rem auto 0;
   padding: var(--btn--padding);
   border-radius: 12px;
   background-color: var(--white--text);
@@ -373,7 +396,7 @@ nav{
   letter-spacing: 0.5px;
 }
 
-.heroText .heroCTAButton:hover {
+ .heroCTAButton:hover, .discoverButton:hover {
     border-style: none;
     border-width: 1px;
     border-color: hsla(0, 0%, 100%, 0.26);
@@ -386,13 +409,9 @@ nav{
   }
 
   .heroVideoContainer{
-    position: absolute;
     width: 100%;
-    height: 45%;
-    top: 45%;
-    left: 0;
-    z-index: -1;
-    /* display: none; */
+    height: 48%;
+    margin-top: -2rem;
 }
 
 .heroVideoContainer video {
@@ -405,8 +424,6 @@ nav{
   .marquee{
 
   position: relative;
-  position: absolute;
-  bottom: 0;
   display:flex;
   flex-wrap: nowrap;
   white-space: nowrap;
@@ -414,6 +431,8 @@ nav{
   /* border: 1px solid red; */
   height: 81px;
   border-top: 1px solid var(--border--primary);
+  border-bottom: 1px solid var(--border--primary);
+  /* margin-top: -2rem; */
   
   }
 
@@ -434,10 +453,10 @@ nav{
   background-image: linear-gradient(260deg, #000, transparent 1%), linear-gradient(270deg, transparent 95%, #000), linear-gradient(180deg, transparent, transparent);
 }
 
-.marquee:after {
+/* .marquee:after {
   right: 0;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0), white);
-}
+  background-image: linear-gradient(260deg, #000, transparent 1%), linear-gradient(270deg, transparent 95%, #000), linear-gradient(180deg, transparent, transparent);
+} */
 
 /* .marquee:hover .marquee--slide {
     animation-play-state: paused;
@@ -476,6 +495,72 @@ nav{
   }
 
 
+  #learn {
+    height: 120%;
+    width: 100%;
+  }
+
+  #learn .sectionContainer {
+    width: var(--max-width);
+    max-width: 85%;
+    margin: 8% auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* gap: 4%; */
+  }
+
+  #learn .sectionContainer .imageSection {
+    position: relative;
+    width: 66%;
+  }
+
+
+  #learn .sectionContainer .imageSection .frontImg{
+    position: absolute;
+    will-change: transform;
+    z-index: 2;
+    transform: translate3d(0px, 0px, 0px) scale3d(0.9, 0.9, 1) ;
+  transform-style: preserve-3d;
+  }
+
+  #learn .sectionContainer .imageSection .imageBehind {
+    will-change: transform, opacity;
+  transform: translate3d(-73px, 113px, 0px) scale3d(0.5, 0.5, 1) ;
+  transform-style: preserve-3d;
+  opacity: 0;
+  position: absolute;
+  left: 331px;
+  }
+
+
+  #learn .sectionContainer .textSection {
+    position: relative;
+    width: 34%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    transform: translateY(20rem);
+  }
+
+  .sectionContainer .textSection h2 {
+    font-family: Stratoslcweb, sans-serif;
+    color: var(--white--text);
+    font-weight: 500;
+    font-size: 3rem;
+  }
+
+  .sectionContainer .textSection p {
+    color: var(--white--text);
+    letter-spacing: -0.01em;
+    color: var(--grey--text--color);
+  }
+
+  .sectionContainer .textSection .discoverButton {
+    margin-top: 1.2rem;
+  }
+
+  
 
   @keyframes slide-left {
     from {

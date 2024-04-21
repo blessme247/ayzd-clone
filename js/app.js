@@ -1,7 +1,13 @@
+import { updateScale, updateOpacity, update3DTranslate } from "./scaleImage.js"
+
 const dropdown = document.querySelector('.dropdown')
 const dropdownLinkWrapper = document.querySelector('.dropdownLinkWrapper')
 const dropdownMenu = document.querySelector('.dropdownMenu')
-const heroText = document.querySelector('.heroText')
+const main = document.querySelector('main')
+
+const imageSection = document.querySelector('#learn .sectionContainer .imageSection ')
+
+// console.log(imageSection, 'imagesection')
   
 
 
@@ -29,7 +35,7 @@ document.addEventListener('mousemove', (event) => {
         dropdownMenu.style.opacity = '1';
         dropdownMenu.style.transform = 'translate(-15%, 0%) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg) translate3d(0px, 0px, 0px)';
         dropdownMenu.style.top = '81%';
-        heroText.style.zIndex = '-1'
+        main.style.zIndex = '-1'
     } 
 
 });
@@ -42,7 +48,7 @@ dropdown.addEventListener('mouseleave', ()=>{
     dropdownMenu.style.opacity = '0'
     dropdownMenu.style.transform = 'translate(-15%, 0%) translate3d(0px, 15px, 0px)'
     dropdownMenu.style.top = '89%'
-    heroText.style.zIndex = '0'
+    main.style.zIndex = '0'
 })
 
 dropdownItems.forEach((item) => {
@@ -71,3 +77,27 @@ dropdownItems.forEach((item) => {
     });
 });
 
+const animateImageSectionMainImage = ()=>{
+
+    // get bottom of the sticky div because when we get to the bottom of the section, we want our video to scale to 1
+    let { bottom} = imageSection.getBoundingClientRect()
+
+    let scale = 1 - ((bottom - window.innerHeight) * .0005)
+
+
+    scale = scale < .2 ? .2 : scale > 1 ? 1 : scale
+    video.style.transform = `scale(${scale})` 
+
+    // Text Transformation
+    let textTrans = bottom - window.innerHeight
+    textTrans = textTrans < 0 ? 0 : textTrans 
+    headerLeft.style.transform = `translateX(${-textTrans}px)`
+    headerRight.style.transform = `translateX(${textTrans}px)`
+
+}
+
+main.addEventListener('scroll', ()=>{
+    updateScale()
+    updateOpacity()
+    update3DTranslate()
+})
